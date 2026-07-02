@@ -18,26 +18,26 @@ const C = {
 
 // ---------- Illustrative data (projected, not actual) ----------
 const MONTHS = [
-  { m: "Jul", trade: 0.4, biz: 210, cit: 2100 },
-  { m: "Aug", trade: 0.6, biz: 320, cit: 4800 },
-  { m: "Sep", trade: 0.8, biz: 440, cit: 8300 },
-  { m: "Oct", trade: 1.0, biz: 560, cit: 12600 },
-  { m: "Nov", trade: 1.3, biz: 690, cit: 17200 },
-  { m: "Dec", trade: 1.6, biz: 810, cit: 21900 },
-  { m: "Jan", trade: 1.9, biz: 930, cit: 26400 },
-  { m: "Feb", trade: 2.2, biz: 1030, cit: 30100 },
-  { m: "Mar", trade: 2.5, biz: 1110, cit: 33200 },
-  { m: "Apr", trade: 2.7, biz: 1170, cit: 35600 },
-  { m: "May", trade: 2.9, biz: 1210, cit: 37200 },
-  { m: "Jun", trade: 3.1, biz: 1240, cit: 38412 },
+  { m: "Jul", trade: 22, biz: 210, cit: 2200 },
+  { m: "Aug", trade: 34, biz: 320, cit: 5000 },
+  { m: "Sep", trade: 50, biz: 440, cit: 8700 },
+  { m: "Oct", trade: 66, biz: 560, cit: 13100 },
+  { m: "Nov", trade: 82, biz: 690, cit: 17900 },
+  { m: "Dec", trade: 98, biz: 810, cit: 22800 },
+  { m: "Jan", trade: 112, biz: 930, cit: 27500 },
+  { m: "Feb", trade: 126, biz: 1030, cit: 31300 },
+  { m: "Mar", trade: 138, biz: 1110, cit: 34500 },
+  { m: "Apr", trade: 148, biz: 1170, cit: 37000 },
+  { m: "May", trade: 155, biz: 1210, cit: 38700 },
+  { m: "Jun", trade: 160, biz: 1240, cit: 40000 },
 ];
-const POP = 38412;
+const POP = 40000;
 const BIZ = 1240;
-const GDP = Math.round(MONTHS[11].trade * 12 * 1e6); // annualized activity, CCU
-const GDP_PC = Math.round(GDP / POP);
-const CCU_CIRC = 4.28e6;
-const TREASURY = 1420000;
-const TRADE_CUM = MONTHS.reduce((s, d) => s + d.trade, 0); // ~21.0M
+const GDP_PC = 150000;              // CCU per citizen, annualized
+const GDP = POP * GDP_PC;           // 6.0B CCU of annualized economic activity
+const CCU_CIRC = 1.2e9;             // ~20% of GDP held in the currency
+const TREASURY = 112000000;         // reserve from the 100M raise plus accumulated revenue
+const TRADE_CUM = MONTHS.reduce((s, d) => s + d.trade, 0); // ~1.19B (series values in M CCU)
 
 const SERVICES = [
   {
@@ -54,7 +54,7 @@ const SERVICES = [
     what: "One stable regional currency held in a CDU wallet, behaving the same in every member territory, plus an optional CCU Savings account that pays a floating return from a diversified portfolio of Caribbean government securities.",
     how: "Every member gets a wallet, holds CCU, and sends, receives, and spends it free within the union. Conversion to a local currency happens only at the edges. Funds not needed day to day can earn yield in the Savings account.",
     cost: "Free within the union. 1% conversion fee only at the boundary. Savings target 3 to 4%.",
-    metrics: [["CCU in circulation", (CCU_CIRC / 1e6).toFixed(2) + "M"], ["Reserve ratio", "100%"], ["Savings rate", "3.8%"]],
+    metrics: [["CCU in circulation", (CCU_CIRC / 1e9).toFixed(2) + "B"], ["Reserve ratio", "100%"], ["Savings rate", "3.8%"]],
   },
   {
     id: "registry", name: "Business Registry", phase: 1, Icon: Building2,
@@ -70,7 +70,7 @@ const SERVICES = [
     what: "The heart of the union: one currency and one settlement network for trade across the Caribbean, without correspondent banks, without converting through the US dollar, and without the fees and delays that make regional trade harder than it should be.",
     how: "Registered businesses invoice and settle in CCU. Payment is instant and final, documents are recorded for both sides, and VAT is computed automatically on the rails.",
     cost: "Free between businesses in CCU. 1% conversion fee only at the boundary.",
-    metrics: [["Cross-border trade settled", TRADE_CUM.toFixed(1) + "M CCU"], ["Active corridors", "5"], ["Avg settlement", "~6 sec"]],
+    metrics: [["Cross-border trade settled", (TRADE_CUM / 1000).toFixed(2) + "B CCU"], ["Active corridors", "5"], ["Avg settlement", "~6 sec"]],
   },
   {
     id: "dispute", name: "Dispute Resolution", phase: 2, Icon: Gavel,
@@ -172,34 +172,34 @@ const BONDS = [
 const MKT_CAP = LISTINGS.reduce((s, l) => s + l[5], 0);
 
 const T_REVENUE = [
-  ["Conversion fees", 245000, C.aqua],
-  ["Union VAT", 118000, C.gold],
-  ["Registration & service fees", 96000, C.ink],
-  ["Savings spread", 53000, C.aquaLt],
+  ["Conversion fees", 2450000, C.aqua],
+  ["Union VAT", 1180000, C.gold],
+  ["Registration & service fees", 960000, C.ink],
+  ["Savings spread", 530000, C.aquaLt],
 ];
 const T_SPEND = [
-  ["Service delivery & agent operations", 118000, C.ink],
-  ["Reserve & liquidity", 96000, C.aqua],
-  ["Legal & compliance", 62000, C.gold],
-  ["Development & partnerships", 48000, C.aquaLt],
-  ["Participation rewards", 22000, C.coral],
-  ["Contingency", 10000, C.mute],
+  ["Service delivery & agent operations", 1180000, C.ink],
+  ["Reserve & liquidity", 960000, C.aqua],
+  ["Legal & compliance", 620000, C.gold],
+  ["Development & partnerships", 480000, C.aquaLt],
+  ["Participation rewards", 220000, C.coral],
+  ["Contingency", 100000, C.mute],
 ];
 const T_REV_TOTAL = T_REVENUE.reduce((s, r) => s + r[1], 0);
 const T_SPEND_TOTAL = T_SPEND.reduce((s, r) => s + r[1], 0);
 const LEDGER = [
-  ["2026-06-28", "in", "VAT receipts (batch)", 48200, "0x9f3a…c1"],
-  ["2026-06-27", "in", "Conversion fees (daily)", 12540, "0x7b21…4e"],
-  ["2026-06-27", "out", "Agent operations, identity verification", -6820, "0x2c88…9a"],
-  ["2026-06-26", "out", "Security audit, Q2", -40000, "0x51de…02"],
-  ["2026-06-25", "in", "Enterprise registrations (37)", 3700, "0x8a44…bd"],
-  ["2026-06-24", "res", "CCU reserve top-up", -96000, "0xd12f…77"],
-  ["2026-06-23", "out", "Participation rewards, governance", -8410, "0x3e90…aa"],
-  ["2026-06-22", "in", "Development grant tranche", 150000, "0xbb07…19"],
-  ["2026-06-21", "in", "Conversion fees (daily)", 11980, "0x66c2…3f"],
-  ["2026-06-20", "out", "Legal and compliance retainer", -18500, "0x40a1…e8"],
-  ["2026-06-19", "in", "VAT receipts (batch)", 44900, "0x1f7b…5c"],
-  ["2026-06-18", "out", "Cash-out partner settlement", -22300, "0x9d33…b0"],
+  ["2026-06-28", "in", "VAT receipts (batch)", 482000, "0x9f3a…c1"],
+  ["2026-06-27", "in", "Conversion fees (daily)", 125400, "0x7b21…4e"],
+  ["2026-06-27", "out", "Agent operations, identity verification", -68200, "0x2c88…9a"],
+  ["2026-06-26", "out", "Security audit, Q2", -400000, "0x51de…02"],
+  ["2026-06-25", "in", "Enterprise registrations (370)", 37000, "0x8a44…bd"],
+  ["2026-06-24", "res", "CCU reserve top-up", -960000, "0xd12f…77"],
+  ["2026-06-23", "out", "Participation rewards, governance", -84100, "0x3e90…aa"],
+  ["2026-06-22", "in", "Development grant tranche", 1500000, "0xbb07…19"],
+  ["2026-06-21", "in", "Conversion fees (daily)", 119800, "0x66c2…3f"],
+  ["2026-06-20", "out", "Legal and compliance retainer", -185000, "0x40a1…e8"],
+  ["2026-06-19", "in", "VAT receipts (batch)", 449000, "0x1f7b…5c"],
+  ["2026-06-18", "out", "Cash-out partner settlement", -223000, "0x9d33…b0"],
 ];
 
 const nf = (n) => n.toLocaleString("en-US");
@@ -310,14 +310,14 @@ function Overview() {
 
       <div className="p-kpis">
         <div className="p-kpi hero"><div className="p-kpi-label"><Users size={13} /> Population (verified citizens)</div><div className="p-kpi-val">{nf(Math.round(pop))}</div><div className="p-kpi-sub">one person, one citizen</div></div>
-        <div className="p-kpi hero"><div className="p-kpi-label"><Activity size={13} /> Union GDP (annualized)</div><div className="p-kpi-val" style={{ color: C.aqua }}>{(gdp / 1e6).toFixed(1)}M</div><div className="p-kpi-sub">CCU of economic activity</div></div>
+        <div className="p-kpi hero"><div className="p-kpi-label"><Activity size={13} /> Union GDP (annualized)</div><div className="p-kpi-val" style={{ color: C.aqua }}>{(gdp / 1e9).toFixed(1)}B</div><div className="p-kpi-sub">CCU of economic activity</div></div>
         <div className="p-kpi hero"><div className="p-kpi-label"><Coins size={13} /> GDP per capita</div><div className="p-kpi-val">{nf(Math.round(pc))}</div><div className="p-kpi-sub">CCU per citizen, annualized</div></div>
         <div className="p-kpi hero"><div className="p-kpi-label"><Building2 size={13} /> Registered businesses</div><div className="p-kpi-val" style={{ color: C.gold }}>{nf(Math.round(biz))}</div><div className="p-kpi-sub">trading across the union</div></div>
       </div>
 
       <div className="p-kpis sec">
-        <div className="p-kpi"><div className="p-kpi-label">CCU in circulation</div><div className="p-kpi-val sm">{(CCU_CIRC / 1e6).toFixed(2)}M</div><div className="p-kpi-sub">100% reserved</div></div>
-        <div className="p-kpi"><div className="p-kpi-label">Cross-border trade settled</div><div className="p-kpi-val sm">{TRADE_CUM.toFixed(1)}M</div><div className="p-kpi-sub">cumulative CCU</div></div>
+        <div className="p-kpi"><div className="p-kpi-label">CCU in circulation</div><div className="p-kpi-val sm">{(CCU_CIRC / 1e9).toFixed(2)}B</div><div className="p-kpi-sub">100% reserved</div></div>
+        <div className="p-kpi"><div className="p-kpi-label">Cross-border trade settled</div><div className="p-kpi-val sm">{(TRADE_CUM / 1000).toFixed(2)}B</div><div className="p-kpi-sub">cumulative CCU</div></div>
         <div className="p-kpi"><div className="p-kpi-label">Governance participation</div><div className="p-kpi-val sm" style={{ color: C.aqua }}>41%</div><div className="p-kpi-sub">DAO average ≈ 17%</div></div>
         <div className="p-kpi"><div className="p-kpi-label">Treasury</div><div className="p-kpi-val sm">{(TREASURY / 1e6).toFixed(2)}M</div><div className="p-kpi-sub">CCU, fully auditable</div></div>
       </div>
