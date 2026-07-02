@@ -134,7 +134,7 @@ Each verified human is exactly one citizen with exactly one vote. Each verified 
 
 ### 4.3 How to become a citizen (process)
 
-1. Download the CDU app or register on the CDU website.
+1. Register on the CDU website.
 2. **Prove who you are.** Submit a government issued photo ID and a live selfie. The union's verification system (automated checks plus an agent review) confirms you are a real, unique person. This is what enforces one person, one identity (Section 4.2). Target: complete within 10 minutes for standard cases.
 3. **Prove you are eligible.** Provide the documents for your track:
    - **Caribbean nationals:** a valid Caribbean passport or national identity card.
@@ -188,181 +188,195 @@ The union commits to radical efficiency by rule: **total administrative expendit
 
 ## 6. Money in, money out: the fiscal model
 
-The CDU funds itself through three clearly separated streams. **A casual user who only sends money ever pays just the 1 percent settlement fee.** The profit tax applies only to enterprises that choose to operate inside the CDU economy.
-
-### 6.1 Settlement fee, the price of moving money
-
-- **1.0 percent of the amount sent** (default; changed by vote; hard cap 2.0 percent).
-- This is the union's primary revenue stream and is deliberately low so the CDU decisively beats the 6 to 7 percent charged by incumbents.
-
-### 6.2 Union Profit Tax, the price of operating inside the economy
-
-- **20 percent flat on net profit** for enterprises registered to operate within the CDU economy (default; changed by vote).
-- **Individuals earning under 15,000 CCU per year through the CDU pay 0 percent** (default; changed by vote).
-- This is competitive against Caribbean corporate tax rates of 25 to 30 percent, and it buys registered enterprises real benefits: capital market access, the union's legal protections, and its services. It applies to profit earned through the union, not to money simply passing through the payment rails.
-
-### 6.3 Service fees
-
+The CDU is funded by the simplest and hardest to evade tax system a modern economy can run: a single, low consumption tax on sales, plus a small fee charged only when money is converted into or out of CCU. There is no profit tax and no income tax, no annual returns to file, and almost nothing to audit, because the union's own rails compute and collect the tax automatically at the moment of sale. This is a large part of why the union can run a real government while holding administrative cost under the 10 percent ceiling of Section 5.5. **Moving CCU within the union is free. A person pays the 1 percent conversion fee only when bringing money into CCU or taking it out.**
+ 
+**Why the union does not tax profit.** Profit is revenue minus expenses, and a business controls its own reported expenses. It is the most manipulable of all tax bases, and taxing it credibly requires audited accounts, expense verification, transfer pricing rules, and the power to compel filings and seize records, powers a digital union does not have and should not pretend to. So the CDU does not tax profit at all. It taxes consumption, which is visible, automatic to measure on the rails, and far harder to hide.
+ 
+### 6.1 The conversion fee (bringing money into or out of CCU)
+ 
+- **1.0 percent of the amount converted**, charged when an outside currency is converted into CCU or when CCU is converted back into an outside currency (default; changed by vote; hard cap 2.0 percent).
+- **Transfers of CCU between wallets inside the union are free.** Once value is in CCU, sending it, spending it, and receiving it cost nothing, because an internal transfer is only a ledger entry. The fee sits where the real cost sits: at the boundary, where conversion, foreign exchange against the basket, and cash in or cash out actually happen.
+- The fee is deliberately low. Because it applies at each crossing of the boundary, money that enters, stays in CCU, and is spent in the economy is charged once, while money that is converted in and later cashed out crosses twice. Even a full round trip remains a fraction of the cost charged by incumbent channels.
+- A negligible anti-spam safeguard may apply to internal transfers to prevent abuse of the network. Members do not meaningfully feel it.
+### 6.2 The Union VAT (a value added tax on sales)
+ 
+- **10 percent value added tax on the sale of goods and services** by registered enterprises operating in the CDU economy (default; changed by vote).
+- It is a true value added tax, not a tax on every transaction. A business charges the 10 percent on what it sells, subtracts the VAT it already paid on its own inputs, and remits only the difference. The tax is therefore paid once, by the final buyer, and does not pile up as goods move along a supply chain. This is deliberately not a turnover tax, which would tax the same value again at every step and quietly compound far above the headline rate.
+- **Worked example.** A workshop buys materials for 100 CCU and pays its supplier 10 CCU of VAT on top. It turns those materials into finished goods and sells them for 300 CCU, collecting 30 CCU of VAT from its customer. Having collected 30 and already paid 10, it sends the treasury the difference, 20 CCU. Trace the workshop's cash: it received 330 from the customer, paid 110 to the supplier, and remitted 20 to the treasury, which leaves exactly 200, its true trading margin of 300 minus 100. The VAT passed straight through the workshop, which kept none of it. The whole 30 was carried by the final buyer, and the workshop was only a collection point, not a taxpayer. That 30 is exactly 10 percent of the 300 final price, and no value was taxed twice.
+- **How the rails know what to charge.** For the network to compute VAT correctly, each payment carries a small amount of structured information. Every transaction is first typed as either a transfer of money, which is never subject to VAT, or a sale, which may be. Each sale then carries a category code drawn from a published VAT schedule: a defined list of goods and service categories, each mapped to its treatment, whether standard rated at 10 percent, zero rated, or exempt. A merchant's checkout assigns the category from its catalogue, the network looks up the treatment, and it charges the correct amount, or nothing, automatically. The schedule itself, including which categories are zero rated, is a governed parameter set and changed by citizen vote, and is the same zero rated list referred to in Section 6.3. This is the same approach modern tax engines already use, where each product carries a tax code that drives the correct rate.
+- **Keeping classification honest.** Because the seller assigns the category, the union guards against mislabelling, such as standard goods dressed up as zero rated. The category appears on every receipt and invoice, so it is visible to the buyer and auditable; catalogues for registered merchants are pre classified; the network flags anomalies, such as a category that does not fit a seller's line of business; agents run spot checks; and deliberate misclassification is treated as fraud under the bonded dispute process and registered identity accountability of Section 8.
+- **How input credits and invoices work.** Most of the time a business submits nothing. When it buys an input from a supplier who is also on the CDU rails, the network has already recorded that purchase and the VAT on it, so the input credit is applied automatically. On the rails, the ledger is the invoice. A business only needs to submit an invoice for an input bought outside the union, imported, or from a supplier who is not on the rails. It uploads the supplier's invoice through the app, attached to the purchase, as a photo, a PDF, or a structured electronic invoice. An agent confirms it is a valid VAT invoice, meaning it shows the supplier and the supplier's tax registration, the buyer, a unique invoice number and date, a description of what was bought, the amount, and the VAT charged shown as its own separate line. If the VAT is not itemised, there is nothing to credit. The agent then fingerprints and registers the invoice so the same one can never be claimed twice, applies the credit, and refers anything large or unusual to a human reviewer.
+- **Why the credit side is guarded.** Input credits are the one place VAT systems are defrauded, through fake or duplicated invoices that claim back tax nobody ever paid. The union protects this in four ways: each invoice can be claimed only once because it is registered on submission; a claimed credit is matched against the supplier's own recorded sale wherever that supplier is on the rails; large or irregular claims go to human review; and a false invoice is fraud under the same accountability as everything else in the union. Over time the union moves suppliers toward structured electronic invoices so the check becomes automatic, which is the direction national tax authorities are already taking.
+- **The result.** For most businesses there is no return to file. Because the network computes the tax from typed, categorised transactions rather than from a taxpayer reporting after the fact, evasion is close to impossible, and the cost of running the tax stays low enough to sit under the union's 10 percent administrative ceiling.
+### 6.3 What the VAT does not touch, and who is protected
+ 
+A consumption tax must be designed so it does not fall on survival, or on families supporting one another. The union builds in three protections by rule:
+ 
+- **Moving money is never taxed.** Remittances, personal transfers, a person moving their own funds, and financial and payment services carry no VAT. Moving CCU within the union is free, and only the conversion fee of Section 6.1 applies, and only when money enters or leaves CCU. A grandmother receiving money from family abroad is never taxed on it.
+- **Essentials are zero rated.** Basic food and medicine are zero rated, meaning no VAT is charged on them while the seller still reclaims the VAT on its own inputs, so necessities stay as cheap as possible (the zero rated list is set by vote).
+- **Small vendors sit below a threshold.** Micro and small vendors whose annual sales fall below a set threshold do not charge VAT at all (threshold set by vote), keeping the smallest traders free of tax paperwork entirely.
+The result is that the tax falls on discretionary spending in the formal economy, and not on sending money home, on feeding a family, or on the smallest vendors.
+ 
+### 6.4 Service fees
+ 
 - **Data search:** 0.5 CCU per public record query; 5 CCU per restricted or sensitive query, where authorized (defaults; changed by vote).
 - **Enterprise registration:** 100 CCU one time (as in Section 4.1).
 - **Dispute bond:** set per Section 8.
-
-### 6.4 Where the money goes
-
-Revenue funds: the reserve and liquidity of the CCU, service delivery and agent operations, reserves (including a contingency reserve), and development and compliance. Administrative spend is held under the 10 percent cap of Section 5.5. All treasury flows are recorded and auditable by every citizen.
-
+### 6.5 Why this is the most efficient tax system in the world
+ 
+- **It is cheap to run.** The tax is computed and collected by the network, with no returns to file and almost nothing to audit, which is what lets the union hold administrative cost under 10 percent of revenue.
+- **It is hard to evade.** The tax is calculated by the rails at the point of sale, not self reported after the fact.
+- **It is broad and stable.** Consumption is a steadier and more predictable base than profit, which swings with the business cycle and can be engineered down to nothing.
+- **It is low.** At 10 percent it sits below the main regional consumption taxes, for example Jamaica at about 15 percent, Barbados at about 17.5 percent, Trinidad and Tobago at about 12.5 percent, and the Dominican Republic at about 18 percent.
+- **It rewards building here.** Because the union takes no share of profit, enterprises keep what they earn, which makes forming and operating inside the CDU economy genuinely attractive.
+### 6.6 Where the money goes
+ 
+Revenue funds the reserve and liquidity of the CCU, service delivery and agent operations, a contingency reserve, and development and compliance. Administrative spend is held under the 10 percent cap of Section 5.5. All treasury flows are recorded and auditable by every citizen.
+ 
 ---
 
 ## 7. Public services
 
 Services launch in phases (timeline in Section 11). Each is defined below with what it is, how it works, and what it costs.
-
-### 7.1 Send Money, the launch service (Phase 1)
-
-**What it is.** Instant, low cost transfer of value between any two CDU wallets, anywhere, at any time, built first for the diaspora to home corridor, where today's costs are highest.
-
-**How it works (process).**
-1. The sender funds the transfer in US dollars (by card, bank transfer, or a cash in partner).
-2. The dollars are converted to CCU at the prevailing rate (about one CCU per US dollar at launch) and held fully in reserve.
-3. The CCU arrives in the recipient's CDU wallet in seconds.
-4. The recipient holds the CCU, spends it with CDU merchants, sends it onward, or cashes out to a local bank account, mobile wallet, or cash out agent at the prevailing rate (a cash out partner may charge a separate local fee).
-
-**What it costs.** 1.0 percent of the amount sent (Section 6.1).
-
-**Worked example.** Maria in New York sends USD 200 to her mother in Castries. The CDU fee is USD 2.00 (1 percent). At launch, one CCU is worth about one US dollar, so her mother receives about **198 CCU (about USD 198) in seconds**. Through a typical incumbent at 6.5 percent, Maria's mother would receive about USD 187 after roughly USD 13 in fees, and wait one to three days.
-
-### 7.2 Digital Identity (Phase 1)
-
-**What it is.** A verified, privacy respecting digital identity for every citizen, the credential that makes honest voting, clean payments, and trusted services possible. It is the substrate beneath every other service, not a standalone product.
-
-**How it works.** Identity is established during citizenship (Section 4.3), with anti money laundering and counter terrorist financing checks built in from day one. Citizens control what they share; the union verifies uniqueness without exposing unnecessary personal data.
-
+ 
+### 7.1 Digital Identity (Phase 1)
+ 
+**What it is.** A verified, privacy respecting digital identity for every citizen and every business, the credential that makes honest voting, trusted trade, and every other service possible. It is the substrate beneath the whole union, not a standalone product.
+ 
+**How it works.** Identity is established during onboarding (Section 4.3), with anti money laundering and counter terrorist financing checks built in from day one. Citizens control what they share, and the union verifies uniqueness without exposing unnecessary personal data.
+ 
 **What it costs.** Included in citizenship.
-
-### 7.3 Business Registry (Phase 2)
-
-**What it is.** Registration and records for enterprises operating in the CDU, a verifiable, tamper evident record of who a business is and its standing.
-
-**How it works.** An enterprise completes verification (Section 4.1), receives a registry entry, and can then transact, hire, raise capital, and access services within the union.
-
-**What it costs.** 100 CCU one time registration; profit tax per Section 6.2.
-
-### 7.4 Dispute Resolution (Phase 2)
-
+ 
+### 7.2 CCU Money and Savings (Phase 1)
+ 
+**What it is.** One shared currency for the region, held in a CDU wallet. The CCU (Section 3) gives every citizen and business a single, stable place to hold value and to pay and be paid, one currency that behaves the same in every member territory and is insulated from the swings of any one national currency. Alongside it sits an optional CCU Savings account that pays a return (Section 3).
+ 
+**How it works.** On approval, every citizen and business receives a CCU wallet. They hold CCU, and send, receive, and spend it instantly and free within the union. They convert to or from a local currency only at the edges, where the conversion fee of Section 6.1 applies. Any holder may move funds they do not need day to day into the CCU Savings account and earn the floating rate described in Section 3. Individuals, including family abroad supporting relatives at home, can send CCU to one another as well, but the currency's purpose is to be held and used across the regional economy, not simply passed through it.
+ 
+**What it costs.** Free to hold, send, receive, and spend within the union. The conversion fee applies only at the boundary (Section 6.1). The savings account follows Section 3.
+ 
+### 7.3 Business Registry (Phase 1)
+ 
+**What it is.** Registration and records for enterprises operating in the CDU, a verifiable, tamper evident record of who a business is and its standing, and the gateway to trading across the union.
+ 
+**How it works.** An enterprise completes verification (Section 4.1), receives a registry entry, and can then hold CCU, trade across the region, hire, raise capital, and access every union service.
+ 
+**What it costs.** 100 CCU one time registration. Sales the enterprise makes in the CDU economy are subject to the union VAT (Section 6.2).
+ 
+### 7.4 Regional Trade and Cross-border Settlement (Phase 1)
+ 
+**What it is.** The heart of the union: a single currency and a single settlement network for trade across the Caribbean. Registered businesses in any member territory buy from and sell to one another in CCU, settled instantly, without correspondent banks, without converting through the US dollar, and without the fees and delays that make regional trade harder than it should be.
+ 
+**Why it matters.** The Caribbean's own trade is throttled by fragmentation: many small currencies, thin foreign exchange markets, and slow, costly correspondent banking. A business on one island often finds it easier to trade with North America than with its neighbour. One shared currency removes that friction, so a firm in Saint Lucia can trade with a supplier in Trinidad or Guyana as easily as it trades at home. This is how a single Caribbean market is actually built, currency first.
+ 
+**How it works.** Registered businesses invoice and settle in CCU. Payment is instant and final, the trade and its documents are recorded for both parties, and any VAT is computed automatically on the rails (Section 6.2). Businesses hold working balances in CCU and convert to a local currency only when they choose to.
+ 
+**What it costs.** Settlement between businesses in CCU is free. The 1.0 percent conversion fee applies only when a business converts to or from an outside currency (Section 6.1).
+ 
+### 7.5 Dispute Resolution (Phase 2)
+ 
 Defined in full in Section 8.
-
-### 7.5 Cross border B2B Settlement and Trade Facilitation (Phase 2)
-
-**What it is.** Instant business to business settlement across islands in CCU, replacing the slow, dollar converting, high fee wire process, plus supporting records (invoices, certificates) that ease legitimate cross border commerce.
-
-**How it works.** A registered business pays a supplier in another island in CCU, settled instantly, with the transaction and its documents recorded for both parties.
-
-**What it costs.** 1.0 percent settlement fee (Section 6.1).
-
+ 
 ### 7.6 Data Services (Phase 2)
-
+ 
 **What it is.** A searchable union database. Public information is openly searchable; sensitive information is access controlled and released only under explicit, published rules.
-
+ 
 **How it works.** Every record is classified as public or restricted under a published data policy. Restricted records require authorization and are released only to permitted parties, with each access logged.
-
+ 
 **What it costs.** 0.5 CCU per public query; 5 CCU per authorized restricted query (Section 6.3).
-
+ 
 ### 7.7 Capital Market (Phase 3)
-
+ 
 **What it is.** A regional venue where CDU enterprises raise capital from CDU and diaspora members, where members allocate savings into regional opportunities, and where the union issues bonds and provides small and medium enterprise lending.
-
+ 
 **How it works.** All capital market activity runs through compliant structures inside the union's legal wrapper (Section 9). Investment instruments are treated as securities where they are securities; membership rights are not investment instruments.
-
-**What it costs.** Service fees set at launch by vote; profit tax per Section 6.2 applies to enterprise earnings.
-
+ 
+**What it costs.** Service fees set at launch by vote.
+ 
 ### 7.8 Insurance Access (Phase 4)
-
+ 
 **What it is.** Access to insurance for citizens, provided by licensed partners. The CDU does not underwrite insurance risk and never carries correlated catastrophe risk on its own balance sheet. It operates as the identity, distribution, and instant payout layer that connects citizens to licensed insurers and to the region's established catastrophe facilities, which hold the risk.
-
+ 
 **How it works (process).**
 1. A citizen selects cover from a licensed partner listed in the union.
 2. The union collects the premium in CCU and verifies eligibility through its identity system.
 3. On an approved claim, or when a parametric trigger fires (for example, a defined wind speed or rainfall level), the payout is delivered to the citizen's wallet within seconds to hours.
-
 **Why this design.** Caribbean catastrophe risk is correlated, since a single hurricane can strike many members at once. Correlated risk is absorbed by licensed carriers and reinsurers with the reserves and reinsurance to hold it, not by a young union. The CDU's contribution is to make insurance cheaper to distribute and far faster to pay out, using verified identity, wallets, parametric triggers, and its dispute system.
-
-**What it costs.** Premiums are set by the underwriting partners; the union charges a small distribution and settlement fee.
-
+ 
+**What it costs.** Premiums are set by the underwriting partners; the union charges a small distribution and payout fee.
+ 
 ### 7.9 Agents as public workers
-
+ 
 Citizens can build and register AI agents to serve as union workers in defined roles: claim verification, database search, first pass evaluation, monitoring. Every agent operates within encoded rules, logs every action for audit, and is supervised by humans with **circuit breakers** that halt agent action under abnormal conditions. Agents take over a function only after it has been validated in service. Agent workers are paid per completed task at published rates, within the administrative cost cap of Section 5.5.
-
+ 
 ---
-
+ 
 ## 8. Dispute resolution
-
+ 
 **What it is.** A fast, fair, bonded process for resolving any review, evaluation, claim, or service decision, where challenging a decision requires putting money behind your conviction.
-
+ 
 **How it works (process).**
-
+ 
 1. **Post.** A decision or claim is posted and enters a **72 hour challenge window** (default).
 2. **Challenge.** To dispute it, a challenger posts a bond equal to **the greater of 25 CCU or 10 percent of the disputed amount** (defaults). If no one challenges within the window, the decision stands.
 3. **Jury.** A challenge escalates to a **jury of 7** randomly selected verified citizens who meet a reputation threshold and each stake **25 CCU** to serve. Jurors review the evidence and vote within **5 days**. A **majority (4 of 7)** decides.
 4. **Appeal.** Either party may appeal once to an expanded **panel of 15** at a higher bond. Disputes over **50,000 CCU** receive a final expert human arbiter.
-
 **Outcome.** The winner receives the original reward plus the loser's forfeited bond. Jurors in the majority split a fee; jurors in the minority forfeit their stake. Because being wrong is costly, the great majority of decisions are never disputed, and most disputes resolve at the jury stage.
-
+ 
 **Legal backstop.** Because the dispute system sits inside a real legal entity (Section 9), catastrophic failures beyond the bond can be pursued through the courts. The CDU does not rely on software alone to deliver justice.
-
+ 
 ---
-
+ 
 ## 9. Legal structure and compliance
-
+ 
 **The union has real legal standing.** A digital union that holds members' funds, facilitates insurance access and capital raising, and runs dispute resolution performs regulated financial and quasi governmental functions. It therefore operates through real legal entities that can hold assets, sign contracts, and bear liability, which also protects individual citizens from personal liability for the union's actions.
-
+ 
 **Structure.** The CDU is anchored by a **Cayman Islands foundation company**, a Caribbean domiciled entity with legal personality, limited liability, and strong institutional credibility, whose constitution mirrors the union's governance and names citizens as beneficiaries while holding them at arm's length from liability. Commercial and operating activities run through separate subsidiaries, so a single dispute cannot reach the governance anchor. **The DAO governs; the foundation and its subsidiaries act and bear liability.**
-
+ 
 **Compliance.** The CDU is compliance first: anti money laundering and counter terrorist financing controls operate from day one; the union engages counsel in every jurisdiction it touches; and it does not treat the DAO label as an exemption from law.
-
+ 
 **Securities.** Capital is raised through separated channels (Section 10). Investment instruments are structured and treated as securities where they constitute securities. Citizenship is non transferable and consumptive, not an investment.
-
+ 
 **Technical security.** All software handling value is independently audited before launch, with continuous monitoring, bug bounties, staged rollouts, and explicit defenses against governance attacks and agent specific threats (prompt manipulation, drift, poisoned data).
-
+ 
 ---
-
+ 
 ## 10. Capital raise
-
+ 
 **The CDU raises 100 million CCU over 24 months** to fund the reserve, the build, licensing, and operations. Funds are raised through three clearly separated channels:
-
+ 
 1. **Development and grant capital**, from development bank and institutional partners; not an investment instrument.
 2. **Investment capital**, structured compliantly and treated as securities where it constitutes securities.
 3. **Citizenship**, free and non transferable; never a fundraising instrument.
-
 **Pre launch contributions are held in independently audited escrow and released only at activation**, under a structure set with counsel before any solicitation. No contribution carrying an expectation of profit is solicited outside a compliant structure.
-
+ 
 **Use of funds (default allocation).**
-
+ 
 - 40 percent, CCU reserve and settlement liquidity
 - 20 percent, technology build and security audits
 - 15 percent, legal, compliance, and licensing across jurisdictions
 - 15 percent, operations, partnerships, and market launch
 - 10 percent, contingency reserve
-
 ---
-
+ 
 ## 11. Roadmap
-
-The CDU launches around one sharp service and expands outward. Each phase gates on evidence (audits, legal clearance, participation, and volume) before the next begins.
-
-**Phase 0, Foundations (Months 0 to 6).** Establish the legal wrapper; build the identity and verification layer; stand up multi signature treasury custody; complete security audits; open audited escrow; close the capital raise; open institutional partnership conversations.
-
-**Phase 1, Launch: Send Money and Identity (Months 6 to 12).** Launch the CCU and the Send Money service on the United States to Saint Lucia and wider Eastern Caribbean diaspora corridor. Targets: 50,000 verified citizens and 25 million CCU in settled volume by end of Phase 1.
-
-**Phase 2, Government and services (Months 12 to 24).** Roll out full voting, the dispute system, Business Registry, cross border B2B settlement, and Data Services. Expand corridors across CARICOM. Begin agent augmented administration under circuit breakers.
-
+ 
+The CDU launches by putting a shared currency and the foundations of a regional market in place, then expands outward. Each phase gates on evidence (audits, legal clearance, participation, and trade volume) before the next begins.
+ 
+**Phase 0, Foundations (Months 0 to 6).** Establish the legal wrapper, including the regulated wrapper for the CCU Savings fund; build the identity and verification layer; stand up multi signature treasury custody and the CCU reserve; complete security audits; open audited escrow; close the capital raise; open institutional partnership conversations.
+ 
+**Phase 1, Launch: a shared currency and a regional market (Months 6 to 12).** Launch digital identity, the CCU and the CCU Savings account, the business registry, and cross-border settlement for regional trade, starting in Saint Lucia and the wider Eastern Caribbean and opening a first trade corridor to another CARICOM economy. Targets: 50,000 verified citizens, 2,000 registered businesses, and 25 million CCU in trade settled across borders by the end of Phase 1.
+ 
+**Phase 2, Government and services (Months 12 to 24).** Roll out full voting, the dispute system, and Data Services, and widen regional trade to more CARICOM corridors and more businesses. Begin agent augmented administration under circuit breakers.
+ 
 **Phase 3, Capital market (Months 24 to 36).** Launch the regional capital market, union bonds, and small and medium enterprise lending through compliant structures.
-
+ 
 **Phase 4, Insurance access (Month 36 onward).** Launch insurance access by connecting citizens to licensed carriers and established regional catastrophe facilities, using the union's identity, premium collection, and instant payout rails. The union distributes and settles; partners underwrite and hold the risk.
-
+ 
 ---
-
+ 
 ## 12. Default parameters at a glance
-
+ 
 | Parameter | Default value | How it changes |
 |---|---|---|
 | CCU value basis | Weighted basket of Caribbean currencies (GDP weighted); 1 CCU at launch, floats thereafter | Two thirds supermajority |
@@ -374,9 +388,11 @@ The CDU launches around one sharp service and expands outward. Each phase gates 
 | Citizenship eligibility | Caribbean nationals, and diaspora with a Caribbean national parent or grandparent | Two thirds supermajority |
 | Individual citizenship | Free | Vote |
 | Enterprise registration | 100 CCU one time | Vote |
-| Settlement fee | 1.0 percent (hard cap 2.0 percent) | Vote |
-| Union profit tax | 20 percent flat on net profit | Vote |
-| Individual tax free threshold | 15,000 CCU per year via CDU | Vote |
+| Conversion fee (into or out of CCU) | 1.0 percent per conversion (hard cap 2.0 percent) | Vote |
+| CCU to CCU transfers | Free | Vote |
+| Union VAT | 10 percent on sales of goods and services; never on transfers | Vote |
+| VAT zero rated items | Basic food and medicine | Vote |
+| VAT small vendor threshold | Annual sales below a set level are VAT free | Vote |
 | Data query fee (public / restricted) | 0.5 CCU / 5 CCU | Vote |
 | Proposal endorsement threshold | 1 percent of citizens or 500, whichever is fewer | Vote |
 | Voting window | 7 days | Vote |
@@ -390,11 +406,11 @@ The CDU launches around one sharp service and expands outward. Each phase gates 
 | Dispute jury and appeal panel | 7 and 15 | Vote |
 | Expert arbiter threshold | Disputes over 50,000 CCU | Vote |
 | Capital raise | 100 million CCU over 24 months | Set at inception |
-
+ 
 ---
-
+ 
 ## 13. Risks and how the CDU handles them
-
+ 
 - **Securities exposure.** Handled by separated capital channels, compliant structuring, and counsel before any solicitation (Sections 9 and 10).
 - **Monetary and legal collision.** Avoided by using a fully reserved settlement unit that is defined by a basket of regional currencies and framed as a payment instrument, and by cooperating with rather than competing against monetary authorities (Sections 1 and 3).
 - **Currency concentration.** Reduced by defining the CCU as a diversified GDP weighted basket rather than a single currency or a single peg, re struck annually (Section 3).
@@ -405,11 +421,10 @@ The CDU launches around one sharp service and expands outward. Each phase gates 
 - **Insurance and catastrophe risk.** The union never underwrites catastrophe risk; it distributes and settles for licensed carriers and established regional facilities that hold the risk (Section 7.8).
 - **Savings fund credit and liquidity risk.** Kept away from the payment token entirely: the CCU is fully reserved in liquid assets and pays no yield, while sovereign credit and liquidity risk sits only in the opt-in CCU Savings fund, which is diversified, holds a liquid reserve and a capital buffer, excludes uninvestable names, and is disclosed to savers as an investment rather than a guaranteed deposit (Section 3).
 - **Adoption risk.** Overcome by leading with genuine payment savings, not speculation, on the highest pain corridor first (Sections 7.1 and 11).
-
 ---
-
+ 
 ## 14. Glossary
-
+ 
 - **CDU:** Caribbean Digital Union, the member owned digital union described here.
 - **CCU:** Caribbean Currency Unit, the union's fully reserved digital settlement unit, whose value is set by a weighted basket of Caribbean currencies. It pays no yield and is used for payment.
 - **CCU Savings fund:** an optional, regulated investment fund holding a diversified portfolio of Caribbean government securities, which pays savers a floating yield. It is separate from the CCU and is an investment, not a guaranteed deposit.
@@ -418,11 +433,12 @@ The CDU launches around one sharp service and expands outward. Each phase gates 
 - **GDP weight:** each member currency's share of the union's combined gross domestic product, used to size its place in the basket.
 - **DAO:** Decentralized Autonomous Organization, a member governed body whose rules and treasury are managed transparently through recorded votes.
 - **KYC:** Know Your Customer, identity verification confirming a member is a real, unique person or entity.
+- **VAT (value added tax):** a tax on the sale of goods and services, charged on the value each seller adds and ultimately borne once by the final buyer. The CDU charges 10 percent, collects it automatically on its rails, zero rates basic food and medicine, and never applies it to transfers of money.
 - **Quadratic voting:** a voting method where casting n votes on one question costs n squared credits, so intensity of preference is expressed without letting any bloc dominate.
 - **Reserve (fully reserved):** assets held one for one against every CCU issued, never lent or leveraged.
 - **Parametric insurance:** insurance that pays out automatically when a measured trigger is met, such as a wind speed or rainfall level, rather than after a manual damage assessment.
-- **Settlement:** the instant, final transfer of value between wallets.
-
+- **Settlement:** the instant, final transfer of value between wallets, which within the union is free.
+- **Conversion fee:** the 1 percent fee charged only when value is converted between an outside currency and CCU, in either direction. It is the union's boundary charge; moving CCU inside the union is free.
 ---
-
+ 
 *White Paper v1.1. A complete, self contained statement of what the Caribbean Digital Union is, what it costs, and how it works. All default values in Section 12 are set by this paper and changed thereafter by citizen vote. Exchange rates and GDP weights used to illustrate the CCU in Section 3 are indicative and are finalized against live market rates and audited GDP at launch.*
