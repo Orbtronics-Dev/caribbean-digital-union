@@ -1,10 +1,48 @@
-# Caribbean Digital Union 
-For forty years the Caribbean has struggled to achieve true unity. Despite the efforts of CARICOM, islands that share almost everything, the same exposure to climate, the same pressures on food security, and deeply connected cultures, have never achieved meaningful economic and political coordination. That coordination has long been understood to be the key to a faster growing economy, a higher quality of life, and stronger trade both among the islands and with the rest of the world. The potential is enormous: taken together, the Caribbean is a people of around 45 million with a combined economy of roughly 700 billion dollars. Yet it remains divided into silos, an inheritance of the slave trade and of the colonial powers that drew the region's map. Nearly two centuries after emancipation, much of the Caribbean still runs on systems that were built to extract value from it rather than to create value within it.
+# Caribbean Digital Union
 
-Integration has stalled for understandable reasons. Sovereignty is precious and hard won, and the political consensus required to pool it has been slow and difficult to reach. But a people this connected has been kept apart for too long, and waiting carries a cost of its own.
+The union portal and the full white paper, built as a single React site and deployed to GitHub Pages.
 
-Unity has never simply been handed to any people. Across the rise and fall of empires, from the Mongols and the Persians to the Romans and the dynasties that followed, the systems that shaped people's lives were built by those with the will to build them. Unity will not arrive on its own, and it will not be granted by circumstance. If the Caribbean is to be united, its people must build that unity themselves.
+Live URL once deployed: **https://orbtronics-dev.github.io/caribbean-digital-union/**
 
-Today, we in the modern era are waging economic warfare against the continuation of a divided Caribbean. We no longer want the economic structures imposed on the region by the colonial powers. We are building a new economy from the ground up: the Caribbean Digital Union.
+## What is in here
 
-One Caribbean economy. One system of government. One currency. One market. Yesterday you were born into systems that were designed, long ago and by others, to extract value from you. Today you have a choice: to help build a new one, and to unite a people who have been separated for generations.
+- `cdu-portal.jsx` — the portal (Overview, Services, Constitution, White Paper, Capital Market, Treasury). All figures are illustrative.
+- `Caribbean-Digital-Union-Whitepaper.md` — the full white paper. The White Paper tab renders this file directly, so editing the markdown updates the site.
+- `main.jsx` — mounts the portal into the page.
+- `index.html` — the page shell.
+- `vite.config.js` — build config. `base` is set to `/caribbean-digital-union/` so assets resolve on GitHub Pages.
+- `.github/workflows/deploy.yml` — builds and deploys to Pages on every push to `main`.
+
+## Run it locally
+
+Requires Node 20 or newer.
+
+```bash
+npm install
+npm run dev      # local dev server, hot reload
+npm run build    # production build into dist/
+npm run preview  # preview the production build
+```
+
+## Deploy to GitHub Pages (one-time setup)
+
+1. Commit these files to the `main` branch of the repo (see below).
+2. On GitHub, go to **Settings → Pages**.
+3. Under **Build and deployment → Source**, choose **GitHub Actions**.
+4. Push to `main` (or trigger the workflow manually from the **Actions** tab). The workflow builds the site and publishes it.
+5. After it finishes, the site is live at **https://orbtronics-dev.github.io/caribbean-digital-union/**.
+
+Every later push to `main` redeploys automatically.
+
+## Editing content
+
+- To change the white paper, edit `Caribbean-Digital-Union-Whitepaper.md`. The table of contents in the White Paper tab is generated from the `##` and `###` headings.
+- To change the dashboard numbers, edit the data constants near the top of `cdu-portal.jsx` (population, GDP per capita, treasury, listings, ledger, and so on).
+
+## If you rename the repository
+
+Update `base` in `vite.config.js` to match the new name, for example `base: "/new-repo-name/"`, then push. For a custom domain or a `username.github.io` repo, set `base: "/"`.
+
+## Note on the figures
+
+The economic figures are an illustration tuned to present the union as a strong economy. They are not modeled or audited. Treat the site as a prototype and design reference until the underlying numbers are grounded in a revenue model.

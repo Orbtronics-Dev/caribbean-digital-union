@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import {
   AreaChart, Area, BarChart, Bar, LineChart, Line, XAxis, YAxis, Tooltip,
   ResponsiveContainer, CartesianGrid, PieChart, Pie, Cell,
@@ -8,6 +8,9 @@ import {
   Wallet, Building2, ArrowLeftRight, Gavel, Database, ShieldCheck, ChevronLeft,
   Users, Coins, Vote,
 } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import wpText from "./Caribbean-Digital-Union-Whitepaper.md?raw";
 
 // ---------- Palette ----------
 const C = {
@@ -136,22 +139,7 @@ const PARAMS = [
   ["Capital raise", "100 million CCU over 24 months"],
 ];
 
-const WHITEPAPER = [
-  ["1", "Why the Caribbean Digital Union exists", "Forty years after CARICOM, the Caribbean remains fragmented into silos inherited from colonial structures. The CDU is a new economy built from the ground up to unite the region, currency first."],
-  ["2", "What the CDU is", "A single digital economy with four parts: a settlement network, a government, a capital market, and an administration run increasingly by accountable AI agents. It is governed as a DAO with a real legal entity bearing liability."],
-  ["3", "The Caribbean Currency Unit and saving", "One shared currency defined by a GDP-weighted basket of Caribbean currencies rather than a US dollar peg, fully reserved and redeemable, plus an optional yield-bearing CCU Savings fund holding a diversified portfolio of regional government securities."],
-  ["4", "Citizenship", "Open to Caribbean nationals and to the diaspora by descent, proven through a documentary chain. One verified person is one citizen with one non transferable vote, and exit is always guaranteed."],
-  ["5", "Government and governance", "Collective, high-stakes decisions are made by quadratic vote of verified citizens, with paid participation and a hard 10% administrative cost ceiling."],
-  ["6", "The most efficient tax system", "No profit tax. A single 10% VAT on sales, computed and collected automatically on the rails, with food and medicine zero-rated and transfers never taxed, plus a 1% conversion fee only at the currency boundary."],
-  ["7", "Public services", "Launching with digital identity, CCU money and savings, the business registry, and cross-border trade settlement, then expanding into dispute resolution, data services, a capital market, and insurance access."],
-  ["8", "Dispute resolution", "A fast bonded process: a challenge posts a bond, a jury of seven staked citizens decides within five days, with appeal and expert arbitration for large disputes."],
-  ["9", "Legal structure and compliance", "Anchored by a Cayman foundation company with operating subsidiaries. The DAO governs, the entity bears liability, and anti money laundering rules apply from day one."],
-  ["10", "Capital raise", "100 million CCU over 24 months through three separated channels: development capital, compliant investment capital, and free, non-investment citizenship, with pre-launch funds in audited escrow."],
-  ["11", "Roadmap", "Phase 1 launches the shared currency and the foundations of a regional market. Later phases add full governance and disputes, a capital market, and insurance access."],
-  ["12", "Default parameters", "Every fee, threshold, and rule is stated as a default value, changeable by citizen vote, and gathered in one table."],
-  ["13", "Risks and mitigations", "Securities, monetary, liability, plutocracy, security, agent, insurance, and adoption risks are each named with a specific mitigation."],
-  ["14", "Glossary", "Plain-language definitions of the CCU, the basket, the DAO, VAT, quadratic voting, the conversion fee, and more."],
-];
+// The White Paper tab renders the full document from Caribbean-Digital-Union-Whitepaper.md
 
 const CUX = { level: 1247.83, chg: 0.94, pts: 11.66 };
 const CUX_SPARK = [1180, 1176, 1189, 1201, 1195, 1210, 1222, 1218, 1231, 1226, 1238, 1233, 1240, 1236, 1244, 1239, 1247, 1243, 1246, 1247.83].map((v, i) => ({ i, v }));
@@ -464,33 +452,46 @@ function Constitution() {
 }
 
 // ---------- White Paper ----------
+// ---------- White Paper (full document) ----------
+const wpSlug = (s) =>
+  String(s).toLowerCase().replace(/[^\w\s-]/g, "").trim().replace(/\s+/g, "-");
+
+function wpToc(md) {
+  const out = [];
+  md.split("\n").forEach((line) => {
+    const m2 = /^##\s+(.+?)\s*$/.exec(line);
+    const m3 = /^###\s+(.+?)\s*$/.exec(line);
+    if (m2) out.push({ lvl: 2, text: m2[1], id: wpSlug(m2[1]) });
+    else if (m3) out.push({ lvl: 3, text: m3[1], id: wpSlug(m3[1]) });
+  });
+  return out;
+}
+
+const headingText = (children) =>
+  React.Children.toArray(children)
+    .map((c) => (typeof c === "string" ? c : c && c.props ? headingText(c.props.children) : ""))
+    .join("");
+
+const mdHeading = (Tag) => ({ children }) => <Tag id={wpSlug(headingText(children))}>{children}</Tag>;
+
+const MD_COMPONENTS = {
+  h1: mdHeading("h1"), h2: mdHeading("h2"), h3: mdHeading("h3"), h4: mdHeading("h4"),
+};
+
 function WhitePaperView() {
-  const [open, setOpen] = useState("1");
+  const toc = useMemo(() => wpToc(wpText), []);
   return (
     <div>
-      <div className="p-wp-hero">
-        <div className="p-wp-eyebrow">Founding document · v1.1</div>
-        <div className="p-wp-title">The Caribbean Digital Union</div>
-        <p className="p-wp-lede">The digital infrastructure for a new Caribbean economy: the first, and most efficient, fully digital economy administered by accountable AI agents. At its centre is one shared currency for the region, the Caribbean Currency Unit, set by a weighted basket of Caribbean currencies rather than a peg to the US dollar.</p>
-      </div>
+      <div className="p-lead">The full founding document, rendered in place. Use the contents to jump to any section.</div>
       <div className="p-wp-grid">
-        <div className="p-wp-toc">
-          {WHITEPAPER.map(([n, t]) => (
-            <button key={n} className={"p-wp-tocitem" + (open === n ? " on" : "")} onClick={() => setOpen(n)}>
-              <span className="p-wp-num">{n}</span>{t}
-            </button>
+        <nav className="p-wp-toc">
+          {toc.map((t, i) => (
+            <a key={i} href={"#" + t.id} className={"p-wp-tocitem" + (t.lvl === 3 ? " sub" : "")}>{t.text}</a>
           ))}
-        </div>
-        <div className="p-card p-wp-body">
-          {WHITEPAPER.filter(([n]) => n === open).map(([n, t, b]) => (
-            <div key={n}>
-              <div className="p-wp-sectionnum">Section {n}</div>
-              <h3 className="p-wp-h">{t}</h3>
-              <p className="p-wp-p">{b}</p>
-              <div className="p-wp-note">This is a condensed view of the section. The full white paper is the authoritative text.</div>
-            </div>
-          ))}
-        </div>
+        </nav>
+        <article className="p-card p-wp-doc">
+          <ReactMarkdown remarkPlugins={[remarkGfm]} components={MD_COMPONENTS}>{wpText}</ReactMarkdown>
+        </article>
       </div>
     </div>
   );
@@ -722,21 +723,29 @@ const CSS = `
 .p-steps li{margin-bottom:4px}
 
 /* white paper */
-.p-wp-hero{background:linear-gradient(135deg,${C.ink} 0%,${C.ink2} 100%);color:#fff;border-radius:14px;padding:24px 26px;margin-bottom:16px;box-shadow:0 16px 36px -22px rgba(8,58,52,.6)}
-.p-wp-eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:${C.aquaLt}}
-.p-wp-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:30px;letter-spacing:-.02em;margin:8px 0 10px}
-.p-wp-lede{font-size:14px;line-height:1.65;color:#C5DED9;max-width:64ch;margin:0}
-.p-wp-grid{display:grid;grid-template-columns:260px 1fr;gap:14px}
-.p-wp-toc{display:flex;flex-direction:column;gap:2px;max-height:520px;overflow:auto}
-.p-wp-tocitem{display:flex;gap:9px;align-items:baseline;text-align:left;background:none;border:0;border-radius:8px;padding:9px 10px;font-family:'IBM Plex Sans';font-size:12.5px;color:${C.mute};cursor:pointer;line-height:1.35}
+.p-wp-grid{display:grid;grid-template-columns:250px 1fr;gap:18px;align-items:start}
+.p-wp-toc{position:sticky;top:14px;display:flex;flex-direction:column;gap:1px;max-height:calc(100vh - 30px);overflow:auto;padding-right:4px}
+.p-wp-tocitem{display:block;text-decoration:none;border-radius:8px;padding:7px 10px;font-family:'IBM Plex Sans';font-size:12.5px;color:${C.mute};line-height:1.35}
 .p-wp-tocitem:hover{background:rgba(8,58,52,.05);color:${C.ink}}
-.p-wp-tocitem.on{background:${C.ink};color:#fff}
-.p-wp-num{font-family:'IBM Plex Mono';font-size:11px;opacity:.7}
-.p-wp-body{min-height:300px}
-.p-wp-sectionnum{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:${C.gold};font-weight:600}
-.p-wp-h{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:22px;margin:6px 0 12px;letter-spacing:-.01em}
-.p-wp-p{font-size:14px;line-height:1.7;color:${C.ink};margin:0 0 16px}
-.p-wp-note{font-size:12px;color:${C.mute};padding-top:12px;border-top:1px solid ${C.line}}
+.p-wp-tocitem.sub{padding-left:22px;font-size:12px;opacity:.9}
+.p-wp-doc{min-width:0;padding:26px 30px;line-height:1.72;font-size:14px;color:${C.ink}}
+.p-wp-doc>*:first-child{margin-top:0}
+.p-wp-doc h1{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:30px;letter-spacing:-.02em;margin:0 0 6px;scroll-margin-top:80px}
+.p-wp-doc h2{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:21px;letter-spacing:-.01em;margin:30px 0 12px;padding-top:18px;border-top:1px solid ${C.line};scroll-margin-top:80px}
+.p-wp-doc h3{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:16px;margin:20px 0 8px;scroll-margin-top:80px}
+.p-wp-doc h4{font-weight:700;font-size:14px;margin:16px 0 6px;scroll-margin-top:80px}
+.p-wp-doc p{margin:0 0 13px}
+.p-wp-doc ul,.p-wp-doc ol{margin:0 0 13px;padding-left:22px}
+.p-wp-doc li{margin-bottom:5px}
+.p-wp-doc strong{font-weight:600;color:${C.ink}}
+.p-wp-doc em{color:${C.mute}}
+.p-wp-doc a{color:${C.aqua};text-decoration:underline}
+.p-wp-doc hr{border:0;border-top:1px solid ${C.line};margin:22px 0}
+.p-wp-doc blockquote{margin:0 0 13px;padding:8px 0 8px 16px;border-left:3px solid ${C.aquaLt};color:${C.mute};font-style:italic}
+.p-wp-doc code{font-family:'IBM Plex Mono';font-size:12.5px;background:${C.bg};padding:1px 5px;border-radius:4px}
+.p-wp-doc table{width:100%;border-collapse:collapse;font-size:12.5px;margin:0 0 16px;display:block;overflow-x:auto}
+.p-wp-doc th,.p-wp-doc td{border:1px solid ${C.line};padding:7px 10px;text-align:left;vertical-align:top}
+.p-wp-doc th{background:${C.bg};font-weight:600}
 
 /* market */
 .p-idx-row{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
@@ -782,7 +791,8 @@ const CSS = `
   .p-grid2{grid-template-columns:1fr}
   .p-wide{grid-column:span 1}
   .p-wp-grid{grid-template-columns:1fr}
-  .p-wp-toc{flex-direction:row;flex-wrap:wrap;max-height:none}
+  .p-wp-toc{position:static;max-height:none}
+  .p-wp-doc{padding:18px 18px}
   .p-detail-metrics{grid-template-columns:1fr}
 }
 @media (max-width:480px){
